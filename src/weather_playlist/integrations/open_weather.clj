@@ -18,7 +18,7 @@
   (let [params {"q" city "limit" 1 "appid" api-key}]
     (-> endpoint
         (str geocode-path)
-        (http-client/get params)
+        (http-client/get :query-params params)
         parse-geocode)))
 
 (defn- parse-current-weather [resp]
@@ -30,7 +30,6 @@
                       (get "weather")
                       first
                       (get "main"))]
-      (println body)
       {:temp temp :feels-like feels-like :weather weather})
     resp))
 
@@ -38,5 +37,5 @@
   (let [params {"lat" lat "lon" lon "appid" api-key "units" "metric"}]
     (-> endpoint
         (str weather-path)
-        (http-client/get params)
+        (http-client/get :query-params params)
         parse-current-weather)))
