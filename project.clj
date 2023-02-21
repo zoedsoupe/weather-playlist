@@ -8,6 +8,7 @@
                  [io.pedestal/pedestal.immutant "0.5.10"]
                  [org.clojure/data.json "0.2.6"]
                  [com.walmartlabs/lacinia "1.2"]
+                 [clj-http "3.12.3"]
                  [com.walmartlabs/lacinia-pedestal "1.1"]
                  [org.slf4j/slf4j-simple "1.7.28"]]
   :plugins [[lein-cljfmt "0.9.2"]]
