@@ -1,0 +1,30 @@
+type Artist {
+  name: String!
+}
+
+type Song {
+  title: String!
+  release_year: String!
+  genre: String!
+  artist: Artist!
+}
+
+type Playlist {
+  name: String!
+  artists: [Artist!]
+  songs: [Song!]
+  genres: [String!]
+}
+
+type Temperature {
+  value: String!
+  genre: String!
+}
+
+type Mutation {
+  generate_playlist(city: String, lat: String, long: String): Playlist!
+}
+
+type Query {
+  temperatures: [Temperature!]
+}
