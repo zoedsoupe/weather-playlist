@@ -9,8 +9,9 @@
 (defn- parse-geocode [resp]
   (if (contains? resp :ok)
     (let [body (first (:ok resp))
-          lat (get-in body ["lat"])
-          lon (get-in body ["lon" ])]
+          lat (get body :lat)
+          lon (get body :lon)]
+    (println body)
       {:lat lat :lon lon})
     resp))
 
@@ -18,18 +19,18 @@
   (let [params {"q" city "limit" 1 "appid" api-key}]
     (-> endpoint
         (str geocode-path)
-        (http-client/get :query-params params)
+        (http-client/get {:query-params params})
         parse-geocode)))
 
 (defn- parse-current-weather [resp]
   (if (contains? resp :ok)
     (let [body (:ok resp)
-          temp (get-in body ["main" "temp"])
-          feels-like (get-in body ["main" "feels_like"])
+          temp (get-in body [:main :temp])
+          feels-like (get-in body [:main :feels_like])
           weather (-> body 
-                      (get "weather")
+                      (get :weather)
                       first
-                      (get "main"))]
+                      (get :main))]
       {:temp temp :feels-like feels-like :weather weather})
     resp))
 
@@ -37,5 +38,5 @@
   (let [params {"lat" lat "lon" lon "appid" api-key "units" "metric"}]
     (-> endpoint
         (str weather-path)
-        (http-client/get :query-params params)
+        (http-client/get {:query-params params})
         parse-current-weather)))

@@ -10,6 +10,7 @@
                  [com.walmartlabs/lacinia "1.2"]
                  [clj-http "3.12.3"]
                  [com.walmartlabs/lacinia-pedestal "1.1"]
+                 [cheshire "5.9.0"]
                  [org.slf4j/slf4j-simple "1.7.28"]]
   :plugins [[lein-cljfmt "0.9.2"]]
   :main ^:skip-aot weather-playlist.core
